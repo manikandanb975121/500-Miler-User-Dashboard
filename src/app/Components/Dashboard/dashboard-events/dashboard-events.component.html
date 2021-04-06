@@ -1,0 +1,274 @@
+
+<div class="row">
+
+    <div class="col-xl-4 col-md-12">
+
+
+        <nb-card [size]="'small'">
+            <nb-card-header class="text-center">On Going Events</nb-card-header>
+              <nb-list>
+                <nb-list-item *ngFor="let event of registeredEvents;">
+                    
+                    <button
+                        type="button"
+                        class="float-left"
+                        shape="round" 
+                        size="small"
+                        status="primary" 
+                        nbButton
+                        (click)="openLeaderBoard(event._id)"
+                    >
+                        <nb-icon icon="eye-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+                    </button>
+
+                    <nb-user
+                        shape="rectangle" 
+                        class="float-right ml-4" 
+                        [name]="event.event_name" 
+                        [picture]="event.event_title_image" 
+                        showTitle="false" 
+                        [title]="event.event_name">
+                    </nb-user>
+
+                    
+                </nb-list-item>
+              </nb-list>
+        </nb-card>
+    
+    </div>
+    
+    
+    <div class="col-xl-8 col-md-12">
+    
+        <nb-card [size]="'medium'">
+
+            <!-- <nb-card-header class="text-center">Leader Board</nb-card-header> -->
+
+            <nb-card-body>
+
+                <div *ngIf="leaderBoard?.length <= 0">
+                    <h6 class="text-center text-disabled">Please Select the Events</h6>
+                </div>
+
+
+                <div *ngIf="open">
+
+                    <nb-tabset>
+
+                        <nb-tab [tabTitle]="leaderBoard.event_name" tabIcon="email-outline" responsive>
+                            
+                            <div class="row">
+
+                                <div class="col-xl-6 col-md-12">
+
+                                    <div class="image-preview">
+                                        <img [src]="leaderBoard.event_title_image" />
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-xl-6 col-md-12">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-md-12">
+                                            <p class="font-weight-bold">Name</p>
+                                        </div>
+                    
+                                        <div class="col-xl-8 col-md-12">
+                                            <p class="text-muted">{{ leaderBoard.event_name | uppercase }}</p>
+                                        </div>
+                                    </div>
+                    
+                                    <hr>
+                    
+                                    <div class="row">
+                                        <div class="col-xl-4 col-md-12">
+                                            <p class="font-weight-bold">Kilo Meter</p>
+                                        </div>
+                    
+                                        <div class="col-xl-8 col-md-12">
+                                            <p class="text-muted">{{ leaderBoard.event_target_km }} Km</p>
+                                        </div>
+                                    </div>
+                    
+                                    <hr>
+                    
+                                    <div class="row">
+                                        <div class="col-xl-4 col-md-12">
+                                            <p class="font-weight-bold">Amount</p>
+                                        </div>
+                    
+                                        <div class="col-xl-8 col-md-12">
+                                            <p class="text-muted">Rs. {{ leaderBoard.event_amount }}</p>
+                                        </div>
+                                    </div>
+                    
+                                    <hr>
+                    
+                                    <div class="row">
+                                        <div class="col-xl-4 col-md-12">
+                                            <p class="font-weight-bold">No Of Participants</p>
+                                        </div>
+                    
+                                        <div class="col-xl-8 col-md-12">
+                                            <p class="text-muted">{{ leaderBoard.event_participants.length }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12">
+                                        <button
+                                            type="button"
+                                            class="float-right ml-4"
+                                            shape="round" 
+                                            size="small"
+                                            status="primary" 
+                                            nbButton
+                                            (click)="openEvents(leaderBoard._id)"
+                                        >
+                                            <nb-icon icon="eye-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> View More
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </nb-tab>
+
+                        <nb-tab tabTitle="Users" tabIcon="person-outline"  [badgeText]="leaderBoard.event_participants.length" badgeStatus="primary" responsive>
+                          
+
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12">
+                                    <input type="text" (input)="onSerachChange($event.target.value)"  nbInput fullWidth placeholder="Search User">
+                                </div>
+                                
+                                <div *ngIf="user">
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12">
+
+
+                                            <nb-list>
+                                                <nb-list-item>
+                                                    <button
+                                                        type="button"
+                                                        class="float-left"
+                                                        shape="round" 
+                                                        size="small"
+                                                        status="success" 
+                                                        nbButton
+                                                        (click)="openActivity(user.activity.activity)"
+                                                    >
+                                                        <nb-icon icon="arrow-ios-back-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+                                                    </button>
+    
+                                                    <nb-user
+                                                        shape="rectangle" 
+                                                        class="float-right ml-4" 
+                                                        [name]="user.user.first_name" 
+                                                        [picture]="user.user.profile_image" 
+                                                        showTitle="false" 
+                                                        [title]="user.user.first_name">
+                                                    </nb-user>
+    
+                                                    
+                                                </nb-list-item>
+                                              </nb-list>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row mt-4">
+
+
+                                <div class="col-xl-7 col-md-12 mt-4">
+                                    <div *ngIf="activity.length <= 0">
+                                        <h6 class="text-disabled text-center">Please Select the Users</h6>
+                                    </div>
+
+                                    <div *ngIf="activity.length > 0">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12">
+                                                <h6 class="text-center">Daily Activity</h6>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let act of activity; let i = index">
+                                            <div class="row mt-3">
+
+                                                <div class="col-xl-4 col-md-12 mt-2">
+                                                   {{ i + 1}} ) {{ act.activityName }}
+                                                </div>
+
+                                                <div class="col-xl-4 col-md-12 mt-2">
+                                                    {{ act.date | date: 'medium'}}
+                                                </div>
+
+                                                <div class="col-xl-4 col-md-12 mt-2">
+                                                    {{ (act.km/1000).toFixed(2) }} Km
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+    
+                                <div class="col-xl-5 col-md-12 mt-4">
+    
+                                    <nb-card [size]="'small'">
+                                        <!-- <nb-card-header class="text-center">Users</nb-card-header> -->
+                                          <nb-list>
+                                            <nb-list-item *ngFor="let participant of leaderBoard.event_participants;">
+                                                <button
+                                                    type="button"
+                                                    class="float-left"
+                                                    shape="round" 
+                                                    size="small"
+                                                    status="success" 
+                                                    nbButton
+                                                    (click)="openActivity(participant.activity.activity)"
+                                                >
+                                                    <nb-icon icon="arrow-ios-back-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+                                                </button>
+
+                                                <nb-user
+                                                    shape="rectangle" 
+                                                    class="float-right ml-4" 
+                                                    [name]="participant.user.first_name" 
+                                                    [picture]="participant.user.profile_image" 
+                                                    showTitle="false" 
+                                                    [title]="participant.user.first_name">
+                                                </nb-user>
+
+                                                
+                                            </nb-list-item>
+                                          </nb-list>
+                                    </nb-card>
+    
+                                </div>
+
+
+                            </div>
+
+
+                        </nb-tab>
+
+                    </nb-tabset>
+
+                </div>
+
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+
+    
+</div>
+
+
+

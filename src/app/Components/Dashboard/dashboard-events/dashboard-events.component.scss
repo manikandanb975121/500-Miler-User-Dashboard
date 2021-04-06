@@ -1,0 +1,30 @@
+.image-preview {
+    height: 13rem;
+    // margin: 1rem 0;
+    width: 100%;
+}
+.image-preview img {
+    height: 80%;
+}
+
+.nb-theme-default {
+    background-color: transparent !important;
+    color: #222b45 !important;
+    font-family: Open Sans, sans-serif !important;
+    font-size: 0.9375rem !important;
+    font-weight: 400 !important;
+    line-height: 1.25rem !important;
+    padding: 0rem 0rem !important; 
+}
+
+nb-tabset nb-tab {
+
+    // margin-top: 5px !important;
+    // background-color: transparent !important;
+    // color: #222b45 !important;
+    // font-family: Open Sans, sans-serif !important;
+    // font-size: 0.9375rem !important;
+    // font-weight: 400 !important;
+    // line-height: 1.25rem !important;
+    padding: 1rem 1rem !important; 
+}

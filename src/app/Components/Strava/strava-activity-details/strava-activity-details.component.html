@@ -1,0 +1,266 @@
+<nb-card accent="primary" status="info" *ngIf="activity">
+    <nb-card-header>{{ activity.name | uppercase }}</nb-card-header>
+    <nb-card-body>
+      
+        <div class="row">
+
+            <div class="col-xl-6 col-md-12">
+                <!-- <div class="image-preview">
+                    <img [src]="events.event_title_image" />
+                </div> -->
+
+                <div class="image-preview">
+
+                    <agm-map [disableDefaultUI]="true" [latitude]="activity.end_latlng[0]" [longitude]="activity.end_latlng[1]" [zoom]="17" [mapTypeControl]='true'>
+                        <agm-marker
+                          [latitude]="activity.start_latlng[0]" [longitude]="activity.start_latlng[1]"
+                        ></agm-marker>
+    
+                        <agm-marker
+                          [latitude]="activity.end_latlng[0]" [longitude]="activity.end_latlng[1]"
+                        ></agm-marker>
+    
+                          <agm-polyline [visible]="true" [strokeWeight]="5" [strokeColor]="'#fa962a'">
+                            <agm-polyline-point
+                              *ngFor="let coordinate of activity.route; let i=index"
+                              [latitude]="coordinate[0]"
+                              [longitude]="coordinate[1]">
+                            </agm-polyline-point>
+                          </agm-polyline>
+                      </agm-map>
+
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 mt-4">
+
+                        <button 
+                            type="button"
+                            class="mb-4"
+                            shape="round" 
+                            size="small"
+                            status="info" 
+                            nbButton
+                        >
+                            <nb-icon icon="camera-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                        </button>
+
+                        <button 
+                            type="button"
+                            class="mb-4 ml-4"
+                            shape="round" 
+                            size="small"
+                            status="danger" 
+                            nbButton
+                        >
+                            <nb-icon icon="person-remove-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                        </button>
+
+                        <button 
+                        type="button"
+                        class="mb-4 ml-4"
+                        shape="round" 
+                        size="small"
+                        status="success" 
+                        (click)="register(activity.id)"
+                        nbButton
+                    >
+                        <nb-icon icon="checkmark-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> ADD TO EVENT
+                    </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-md-12">
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                        <p class="font-weight-bold">Name</p>
+                    </div>
+
+                    <div class="col-xl-8 col-md-12">
+                        <p class="text-muted">{{ activity.name | uppercase }}</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                        <p class="font-weight-bold">Kilo Meter</p>
+                    </div>
+
+                    <div class="col-xl-8 col-md-12">
+                        <p class="text-muted">{{ (activity.distance/1000).toFixed(2) }} Km</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                        <p class="font-weight-bold">Type</p>
+                    </div>
+
+                    <div class="col-xl-8 col-md-12">
+                        <p class="text-muted">{{ activity.type }}</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-12">
+                        <p class="font-weight-bold"><nb-icon icon="heart-outline"></nb-icon> Kudos </p>
+                    </div>
+
+                    <div class="col-xl-8 col-md-12">
+                        <p class="text-muted">{{ activity.kudos_count }}</p>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-xl-3 col-md-12 mt-4">
+                <p class="font-weight-bold">Start Date</p>
+                <p class="text-muted">{{ activity.start_date | date: 'medium' }}</p>
+            </div>
+
+            <div class="col-xl-3 col-md-12 mt-4">
+                <p class="font-weight-bold">Max Speed</p>
+                <p class="text-muted">{{ activity.max_speed }}</p>
+            </div>
+
+
+            <div class="col-xl-3 col-md-12 mt-4">
+                <p class="font-weight-bold">Averge Speed</p>
+                <p class="text-muted">{{ activity.average_speed }}</p>
+            </div>
+            
+            <div class="col-xl-3 col-md-12 mt-4">
+                <p class="font-weight-bold">Moving Time</p>
+                <p class="text-muted">{{ (activity.moving_time / 60).toFixed(2) }} mins</p>
+            </div>
+
+        </div>
+
+    </nb-card-body>
+</nb-card>
+
+<ng-template #secondDialog>
+    <h5 matDialogTitle>Add To Event</h5>
+
+    <div class="row" *ngIf="enable">
+        <div class="col">
+            <nb-card>
+                <nb-card-header>
+                  <nb-user 
+                    size="large"
+                    shape="rectangle"
+                     [name]="selectedEvent.eventId.event_name"
+                     [title]="selectedEvent.eventId.event_name"
+                     [picture]="selectedEvent.eventId.event_title_image"
+                     showTitle="false">
+                  </nb-user>
+                </nb-card-header>
+                <nb-card-body>
+        
+                <p class="text-disabled">Note: Below Activity and their dates cannot be used for others activity dates</p>
+                 <div class="mt-2" *ngFor="let actDate of activityAndDates">
+                    <div class="row mt-2">
+
+                        <div class="col-xl-6 col-md-12">
+                            {{ actDate.activityName }}
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            {{ actDate.date | date: 'medium' }}
+                        </div>
+                    </div>
+                 </div>
+                  
+                </nb-card-body>
+                <nb-card-footer>
+        
+                    <div class="row">
+
+                        <div class="col">
+                            Target : {{ selectedEvent.eventId.event_target_km }} Km
+                        </div>
+
+                        <div class="col">
+                            Amount: Rs. {{ selectedEvent.eventId.event_amount }}
+                        </div>
+
+                    </div>
+                      
+        
+                </nb-card-footer>
+              </nb-card>
+        </div>
+    </div>
+  
+    <div *ngIf="events">
+
+        <form [formGroup]="addEventForm">
+
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>Select a Event</mat-label>
+                <mat-select name="Select Event" (selectionChange)="select($event)">
+                    <mat-option *ngFor="let event of events" [value]="event.eventId._id">
+    
+                        <div class="row">
+                            <div class="col">
+                                <nb-user 
+                                    size="small"
+                                    shape="rectangle"
+                                    [name]="event.eventId.event_name"
+                                    [title]="event.eventId.event_name"
+                                    [picture]="event.eventId.event_title_image"
+                                    showTitle="false">
+                                </nb-user>
+                            </div>
+                        </div>
+                      
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+    
+            <input nbInput formControlName="date" fullWidth placeholder="select Date" [nbDatepicker]="datepicker">
+            <nb-datepicker  #datepicker></nb-datepicker> 
+            <small class="text-danger"
+                            *ngIf="addEventForm.get('date').hasError('required')">
+                            Please Select the Date
+                        </small>
+    
+            <button 
+                type="button"
+                (click)="addEvent()"
+                class="mt-4"
+                shape="round" 
+                size="small"
+                status="success" 
+                nbButton
+            >
+                <nb-icon icon="checkmark-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> ADD
+            </button>
+
+            
+        </form>
+        
+    </div>
+
+
+                    
+    
+
+</ng-template>

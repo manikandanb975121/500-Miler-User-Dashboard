@@ -1,0 +1,89 @@
+
+<div class="row">
+  <div class="col">
+    <nb-toggle [formControl]="toggleFormControl" (checkedChange)="toggle($event)" [status]="status">{{ text }}</nb-toggle>
+  </div>
+  <div class="col">
+    <p class="text-disabled">{{ value }}</p>
+  </div>
+  
+</div>
+
+<div class="row">
+    <div *ngFor="let event of events">
+      
+      <div *ngIf="event.isRegisterd === filter" class="col-xl-12 col-md-12">
+
+        <nb-card>
+          <nb-card-header>
+            <nb-user 
+              size="large"
+              shape="rectangle"
+               [name]="event.event_name"
+               [title]="event.event_name"
+               [picture]="event.event_title_image"
+               showTitle="false">
+            </nb-user>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-xl-4 mt-1">
+                No Of Days
+              </div>
+              <div class="col-xl-8 mt-1">
+                <p class="text-muted">{{ event.event_days }} days</p>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-xl-4 mt-1">
+                Start Date
+              </div>
+              <div class="col-xl-8 mt-1">
+                <p class="text-muted">{{ event.event_start_date | date: 'medium' }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-4 mt-1">
+                End Date
+              </div>
+              <div class="col-xl-8 mt-1">
+                <p class="text-muted">{{ event.event_end_date | date: 'medium' }}</p>
+              </div>
+            </div>
+            
+          </nb-card-body>
+          <nb-card-footer>
+  
+                <button 
+                    *ngIf="!event.isRegisterd"
+                    type="button"
+                    class="float-right"
+                    shape="round" 
+                    size="small"
+                    status="primary" 
+                    (click)="openView(event._id)"
+                    nbButton
+                >
+                    <nb-icon icon="checkmark-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> Register
+                </button>
+  
+                <button 
+                    *ngIf="event.isRegisterd"
+                    type="button"
+                    class="float-right"
+                    shape="round" 
+                    size="small"
+                    status="success" 
+                    (click)="openView(event._id)"
+                    nbButton
+                >
+                    <nb-icon icon="eye-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> View
+                </button>
+  
+          </nb-card-footer>
+        </nb-card>
+
+      </div>
+    </div>
+</div>

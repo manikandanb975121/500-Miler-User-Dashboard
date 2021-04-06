@@ -1,0 +1,81 @@
+<!-- <nb-layout>
+  <nb-layout-header fixed>
+    <button nbButton status="success" size="tiny" (click)="toggle()">Toggle</button>
+    <button nbButton status="info" size="tiny" (click)="toggleCompact()">Toggle Compact</button>
+  </nb-layout-header>
+
+  <nb-sidebar tag="left"></nb-sidebar>
+  <nb-sidebar right tag="right"></nb-sidebar>
+
+  <nb-layout-column class="colored-column-warning">Layout Content</nb-layout-column>
+</nb-layout> -->
+
+
+<nb-layout windowMode>
+
+  <nb-layout-header fixed>
+
+    <div class="row" style="width: 100%; display: flex;">
+      <div class="col-xl-4">
+        <button
+         type="submit"
+         shape="round" 
+         size="small"
+         status="success" 
+         nbButton
+         (click)="toggle()"
+      >
+          <nb-icon icon="menu-2-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+                                            
+      </button>
+      </div>
+    </div>    
+      
+
+
+      <!-- <nb-user size="large"
+             name="Manikandan B"
+             title="Admin"
+             picture="https://firebasestorage.googleapis.com/v0/b/miler-2f271.appspot.com/o/Profile_Picture%2FIMG_20190112_232950_384.jpg?alt=media&token=47ade68e-42c5-483c-ae8a-6d0448c1f521">
+    </nb-user> -->
+
+      <!-- <nb-icon class="sidebar-toggle" icon="menu-2-outline" (click)="toggle()"></nb-icon>
+    <div class="float-right">
+      <nb-user size="large"
+             name="John Doe"
+             title="Engineer"
+             picture="https://via.placeholder.com/50/4479e7/ffffff?Text=IMG">
+    </nb-user>
+    </div> -->
+    
+    
+  </nb-layout-header>
+
+  <nb-layout-header subheader [hidden]="!userIsAuthenticated">
+    <nb-actions>
+    <nb-action>
+      <nb-user size="medium"
+             name="John Doe"
+             title="Engineer"
+             showName="false"
+             showTitle="false"
+             [picture]="image">
+    </nb-user>
+    </nb-action>  
+      <nb-action icon="home-outline"></nb-action>
+      <nb-action icon="search-outline"></nb-action>
+      <nb-action icon="person-remove-outline" (click)="logout()"></nb-action>
+    </nb-actions>
+  </nb-layout-header>
+
+  <nb-sidebar [hidden]="!userIsAuthenticated" class="menu-sidebar" tag="menu-sidebar" responsive>
+        <nb-menu [items]="itemss"></nb-menu>
+  </nb-sidebar>
+
+
+  <nb-layout-column>
+      <router-outlet></router-outlet>
+  </nb-layout-column>
+
+
+</nb-layout>

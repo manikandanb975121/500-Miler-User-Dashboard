@@ -1,0 +1,283 @@
+<nb-flip-card>
+
+    <nb-card-front>
+
+        <nb-card accent="primary" status="info" *ngIf="events">
+            <nb-card-header>{{ events.event_name | uppercase }}</nb-card-header>
+            <nb-card-body>
+              
+                <div class="row">
+        
+                    <div class="col-xl-6 col-md-12">
+                        <div class="image-preview">
+                            <img [src]="events.event_title_image" />
+                        </div>
+        
+                        <div class="row" *ngIf="!events.isRegisterd">
+                            <div class="col-xl-12 col-md-12">
+        
+                                <button 
+                                    type="button"
+                                    class="mb-4"
+                                    shape="round" 
+                                    size="small"
+                                    status="info" 
+                                    nbButton
+                                >
+                                    <nb-icon icon="camera-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                                </button>
+        
+                                <button 
+                                    type="button"
+                                    class="mb-4 ml-4"
+                                    shape="round" 
+                                    size="small"
+                                    status="danger" 
+                                    nbButton
+                                >
+                                    <nb-icon icon="person-remove-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                                </button>
+        
+                                <button 
+                                type="button"
+                                class="mb-4 ml-4"
+                                shape="round" 
+                                size="small"
+                                status="primary" 
+                                (click)="register(events._id)"
+                                nbButton
+                            >
+                                <nb-icon icon="checkmark-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> Register
+                            </button>
+        
+                            </div>
+        
+                        </div>
+                    </div>
+        
+                    <div class="col-xl-6 col-md-12">
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Name</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_name | uppercase }}</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Kilo Meter</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_target_km }} Km</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Amount</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">Rs. {{ events.event_amount }}</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">No Of Participants</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_participants.length }}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+        
+                </div>
+        
+                <hr>
+        
+                <div class="row">
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">Start Date</p>
+                        <p class="text-muted">{{ events.event_start_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">End Date</p>
+                        <p class="text-muted">{{ events.event_end_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">Registration Close Date</p>
+                        <p class="text-muted">{{ events.event_registration_close_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">No Of Days</p>
+                        <p class="text-muted">{{ events.event_days }}</p>
+                    </div>
+        
+                </div>
+        
+            </nb-card-body>
+        </nb-card>
+
+    </nb-card-front>
+
+    <nb-card-back>
+
+
+        <nb-card accent="primary" status="info" *ngIf="events">
+            <nb-card-header>{{ events.event_name | uppercase }}</nb-card-header>
+            <nb-card-body>
+              
+                <div class="row">
+        
+                    <div class="col-xl-6 col-md-12">
+                        <div class="image-preview">
+                            <img [src]="events.event_title_image" />
+                        </div>
+        
+                        <div class="row" *ngIf="!events.isRegisterd">
+                            <div class="col-xl-12 col-md-12">
+        
+                                <button 
+                                    type="button"
+                                    class="mb-4"
+                                    shape="round" 
+                                    size="small"
+                                    status="info" 
+                                    nbButton
+                                >
+                                    <nb-icon icon="camera-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                                </button>
+        
+                                <button 
+                                    type="button"
+                                    class="mb-4 ml-4"
+                                    shape="round" 
+                                    size="small"
+                                    status="danger" 
+                                    nbButton
+                                >
+                                    <nb-icon icon="person-remove-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> 
+                                </button>
+        
+                                <button 
+                                type="button"
+                                class="mb-4 ml-4"
+                                shape="round" 
+                                size="small"
+                                status="primary" 
+                                (click)="register(events._id)"
+                                nbButton
+                            >
+                                <nb-icon icon="checkmark-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon> Register
+                            </button>
+        
+                            </div>
+        
+                        </div>
+                    </div>
+        
+                    <div class="col-xl-6 col-md-12">
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Name</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_name | uppercase }}</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Kilo Meter</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_target_km }} Km</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">Amount</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">Rs. {{ events.event_amount }}</p>
+                            </div>
+                        </div>
+        
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col-xl-4 col-md-12">
+                                <p class="font-weight-bold">No Of Participants</p>
+                            </div>
+        
+                            <div class="col-xl-8 col-md-12">
+                                <p class="text-muted">{{ events.event_participants.length }}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+        
+                </div>
+        
+                <hr>
+        
+                <div class="row">
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">Start Date</p>
+                        <p class="text-muted">{{ events.event_start_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">End Date</p>
+                        <p class="text-muted">{{ events.event_end_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">Registration Close Date</p>
+                        <p class="text-muted">{{ events.event_registration_close_date | date: 'medium' }}</p>
+                    </div>
+        
+                    <div class="col-xl-3 col-md-12 mt-4">
+                        <p class="font-weight-bold">No Of Days</p>
+                        <p class="text-muted">{{ events.event_days }}</p>
+                    </div>
+        
+                </div>
+        
+            </nb-card-body>
+        </nb-card>
+
+    </nb-card-back>
+
+</nb-flip-card>
+
+
+
