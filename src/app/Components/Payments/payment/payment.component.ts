@@ -40,7 +40,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ 
   pay(){
     let orderId = {
       amount :100000
