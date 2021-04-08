@@ -59,7 +59,7 @@ import { StravaActivityDetailsComponent } from './Components/Strava/strava-activ
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { DashboardEventsComponent } from './Components/Dashboard/dashboard-events/dashboard-events.component';
-import { PaymentComponent } from './Payments/payment/payment.component';
+import { PaymentComponent } from './Components/Payments/payment/payment.component';
 import { PaymentService } from './Services/payment.service';
 
 
