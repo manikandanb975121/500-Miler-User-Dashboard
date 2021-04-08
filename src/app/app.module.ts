@@ -59,6 +59,8 @@ import { StravaActivityDetailsComponent } from './Components/Strava/strava-activ
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { DashboardEventsComponent } from './Components/Dashboard/dashboard-events/dashboard-events.component';
+import { PaymentComponent } from './Payments/payment/payment.component';
+import { PaymentService } from './Services/payment.service';
 
 
 @NgModule({
@@ -73,7 +75,8 @@ import { DashboardEventsComponent } from './Components/Dashboard/dashboard-event
     StravaComponent,
     StravaActivityListComponent,
     StravaActivityDetailsComponent,
-    DashboardEventsComponent
+    DashboardEventsComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +108,7 @@ import { DashboardEventsComponent } from './Components/Dashboard/dashboard-event
     MatSelectModule,
     NbIconModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [PaymentService,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,7 @@ import { EventsComponent } from './Components/Events/events/events.component';
 import { EventDetailsComponent } from './Components/Events/event-details/event-details.component';
 import { StravaComponent } from './Components/Strava/strava/strava.component';
 import { StravaActivityDetailsComponent } from './Components/Strava/strava-activity-details/strava-activity-details.component';
+import { PaymentComponent } from './Payments/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: 'strava/:id',
     component: StravaActivityDetailsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path:'checkout',
+    component:PaymentComponent,
+    canActivate:[AuthGuard]
   }
 ];
 
