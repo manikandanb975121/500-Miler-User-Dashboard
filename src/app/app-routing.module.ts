@@ -13,6 +13,8 @@ import { EventDetailsComponent } from './Components/Events/event-details/event-d
 import { StravaComponent } from './Components/Strava/strava/strava.component';
 import { StravaActivityDetailsComponent } from './Components/Strava/strava-activity-details/strava-activity-details.component';
 import { PaymentComponent } from './Components/Payments/payment/payment.component';
+import { PaymentconfirmationComponent } from './Components/Payments/paymentconfirmation/paymentconfirmation.component';
+
 
 const routes: Routes = [
   {
@@ -52,7 +54,13 @@ const routes: Routes = [
     path:'checkout',
     component:PaymentComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:'confirmation',
+    component:PaymentconfirmationComponent,
+    canActivate:[AuthGuard]
   }
+ 
 ];
 
 @NgModule({

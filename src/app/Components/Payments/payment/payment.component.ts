@@ -20,9 +20,11 @@ export class PaymentComponent implements OnInit {
     "modal": {
       "escape": false,
     },
-    "handler":(response)=>{
-      this.callResponse(response);
-    },
+    "handler":function (response){
+      alert(response.razorpay_payment_id);
+      alert(response.razorpay_order_id);
+      alert(response.razorpay_signature)
+  },
     "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
@@ -57,13 +59,15 @@ export class PaymentComponent implements OnInit {
 
   executePayment(){
     this.rzp1 = new this.payment.nativeWindow.Razorpay(this.options);
+    this.rzp1.on('payment.failed', function (response){
+      console.log(response);
+    });
     this.rzp1.open();
   }
 
-  callResponse(response){
-    console.log(response);
-  }
+  
 
+  
  
 
 }

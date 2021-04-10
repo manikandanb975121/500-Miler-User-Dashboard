@@ -21,9 +21,9 @@ export class PaymentService {
  constructor(private http:HttpClient){}
 
  getOrderId(orderId){
-
-  this.http.post(`${environment.backendURL}/api/checkout`,orderId).subscribe(res=>{
-    this.orderId.next(res)
+   console.log(orderId);
+   this.http.post(`${environment.backendURL}/api/checkout`,orderId).subscribe(res=>{
+      	this.orderId.next(res)
   })
  
  }

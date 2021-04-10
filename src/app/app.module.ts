@@ -61,6 +61,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { DashboardEventsComponent } from './Components/Dashboard/dashboard-events/dashboard-events.component';
 import { PaymentComponent } from './Components/Payments/payment/payment.component';
 import { PaymentService } from './Services/payment.service';
+import { PaymentconfirmationComponent } from './Components/Payments/paymentconfirmation/paymentconfirmation.component';
+
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { PaymentService } from './Services/payment.service';
     StravaActivityListComponent,
     StravaActivityDetailsComponent,
     DashboardEventsComponent,
-    PaymentComponent
+    PaymentComponent,
+    PaymentconfirmationComponent,
+
   ],
   imports: [
     BrowserModule,
